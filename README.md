@@ -16,54 +16,54 @@ To start a container from a built image
 
 The first port is the port on the host machine and the second is the port on the container.
 
-To run multiple containers based on the same image
-`docker run -d -p 8081:8080 --name spring-boot-app1 my-spring-boot-app`
+To run multiple containers based on the same image  
+`docker run -d -p 8081:8080 --name spring-boot-app1 my-spring-boot-app`  
 `docker run -d -p 8082:8080 --name spring-boot-app2 my-spring-boot-app`
 
 To list all containers
 `docker ps`
 
-## Contents of a Dockerfile
+## Dockerfile contents
 A Dockerfile typically includes:
 
--Base Image: The starting point of the Docker image, often an official image from Docker Hub.
--Working Directory: The directory in the image where the following instructions will be executed.
--Copy Commands: Commands to copy files from the host machine into the Docker image.
--Run Commands: Commands to run during the image build process (e.g., installing dependencies).
--Expose Ports: Instructions to expose ports to be accessible from outside the container.
--Entry Point or Command: Instructions to specify the command to run when the container starts.
+-Base Image: The starting point of the Docker image, often an official image from Docker Hub.  
+-Working Directory: The directory in the image where the following instructions will be executed.  
+-Copy Commands: Commands to copy files from the host machine into the Docker image.  
+-Run Commands: Commands to run during the image build process (e.g., installing dependencies).  
+-Expose Ports: Instructions to expose ports to be accessible from outside the container.  
+-Entry Point or Command: Instructions to specify the command to run when the container starts.  
 
-## What a Docker Image Contains
+## Docker Image contents
 A Docker image contains the following components:
 
--Base OS Layer: The underlying operating system layer (e.g., Ubuntu, Alpine).
--Application Code: The source code or binaries of the application.
--Runtime Environment: Dependencies and libraries required to run the application (e.g., JDK for Java applications, Node.js for Node.js applications).
--Configuration Files: Environment variables and configuration files needed by the application.
--Metadata: Instructions on how to set up the container environment, exposed ports, and the default command to run when the container starts.
+-Base OS Layer: The underlying operating system layer (e.g., Ubuntu, Alpine).  
+-Application Code: The source code or binaries of the application.  
+-Runtime Environment: Dependencies and libraries required to run the application (e.g., JDK for Java applications, Node.js for Node.js applications).  
+-Configuration Files: Environment variables and configuration files needed by the application.  
+-Metadata: Instructions on how to set up the container environment, exposed ports, and the default command to run when the container starts.  
 
 ## Docker Networking
-Docker networking allows containers to communicate with each other and with the outside world.
--The default networking mode is the Bridge Network.
--Containers on the same bridge network can communicate with each other using their container names as hostnames.
--By default, containers on a bridge network are isolated from containers on other bridge networks.
+Docker networking allows containers to communicate with each other and with the outside world.  
+-The default networking mode is the Bridge Network.  
+-Containers on the same bridge network can communicate with each other using their container names as hostnames.  
+-By default, containers on a bridge network are isolated from containers on other bridge networks.  
 
 To create a custom network
 `docker network create my_custom_network`
 
 To run a container on a specific network
 ```
-docker run -d --name app1 --network my_custom_network my-image
-docker run -d --name app2 --network my_custom_network my-image
+docker run -d --name app1 --network my_custom_network my-image  
+docker run -d --name app2 --network my_custom_network my-image  
 ```
 
 To verify network configuration
 `docker network inspect my_custom_network`
 
 ## Docker Volumes
-To create a volume accessible both from the host machine and the container
-`docker run -d -v /path/on/host:/path/in/container --name my-container my-image`
-Or
+To create a volume accessible both from the host machine and the container  
+`docker run -d -v /path/on/host:/path/in/container --name my-container my-image`  
+or  
 `docker run -d --mount type=bind,source=/path/on/host,target=/path/in/container --name my-container my-image`
 
 Example
@@ -103,10 +103,10 @@ import pandas as pd
 data_dir = '/app/data'
 print("Files in data directory:", os.listdir(data_dir))
 
-# Assuming there are CSV files in the data directory
-train_data = pd.read_csv(os.path.join(data_dir, 'train', 'train.csv'))
-test_data = pd.read_csv(os.path.join(data_dir, 'test', 'test.csv'))
+# Assuming there are CSV files in the data directory  
+train_data = pd.read_csv(os.path.join(data_dir, 'train', 'train.csv'))  
+test_data = pd.read_csv(os.path.join(data_dir, 'test', 'test.csv'))  
 
-print("Training data head:", train_data.head())
-print("Test data head:", test_data.head())
+print("Training data head:", train_data.head())  
+print("Test data head:", test_data.head())  
 ```
